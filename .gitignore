@@ -1,0 +1,32 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE / Editor
+.vscode/*
+!.vscode/settings.json
+.idea
+
+# AI Coding Assistants
+.claude
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# Coverage
+coverage
+
+# Cache
+.cache
+*.tsbuildinfo
