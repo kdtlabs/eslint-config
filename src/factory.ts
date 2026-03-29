@@ -69,10 +69,6 @@ export const kdt = ({ command = true, environments = ['browser', 'bun', 'node'],
 
     configs.push(stylistic(context, style))
 
-    if (options.perfectionist ?? true) {
-        configs.push(perfectionist(context))
-    }
-
     if (options.unicorn ?? true) {
         configs.push(unicorn(context))
     }
@@ -83,6 +79,10 @@ export const kdt = ({ command = true, environments = ['browser', 'bun', 'node'],
 
     if (options.sonarjs ?? true) {
         configs.push(sonarjs(context))
+    }
+
+    if (options.perfectionist ?? true) {
+        configs.push(perfectionist(context))
     }
 
     if (tailwind ?? isPackageExists('tailwindcss')) {

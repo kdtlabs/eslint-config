@@ -23,9 +23,7 @@ const PRIMITIVE_TYPES = new Set([
     'TSVoidKeyword',
 ])
 
-function isPrimitive(node: { type: string }) {
-    return PRIMITIVE_TYPES.has(node.type)
-}
+const isPrimitive = (node: { type: string }) => PRIMITIVE_TYPES.has(node.type)
 
 const sortTypes = (types: Array<{ text: string, type: string }>, order: TypeOrder) => types.toSorted((a, b) => {
     const aIsPrimitive = isPrimitive(a)

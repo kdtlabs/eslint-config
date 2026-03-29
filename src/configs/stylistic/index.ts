@@ -39,6 +39,7 @@ export const stylistic: EslintConfig<StyleOptions> = ({ isInEditor }, { indent =
                 'kdt/arrow-empty-body-newline': isInEditor ? 'warn' : 'error',
                 'kdt/import-single-line': 'error',
                 'kdt/object-curly-newline': 'error',
+                'kdt/simple-arrow': 'error',
                 'kdt/sort-union-types': 'error',
             },
         },

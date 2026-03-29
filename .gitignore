@@ -15,6 +15,7 @@ Thumbs.db
 
 # AI Coding Assistants
 .claude
+docs/superpowers
 
 # Env files
 .env

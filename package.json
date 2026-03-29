@@ -89,7 +89,7 @@
     },
     "lint-staged": {
         "*": "bun run lint:fix",
-        "*.ts": "bun run typecheck"
+        "*.ts": "bash -c 'bun run typecheck'"
     },
     "commitlint": {
         "extends": "@commitlint/config-conventional"
