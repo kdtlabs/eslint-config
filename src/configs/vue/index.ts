@@ -10,7 +10,7 @@ export interface VueConfigOptions {
     stylisticConfigs?: Config | Config[]
 }
 
-export function getStylisticRules(stylisticConfigs: Linter.Config[]) {
+export function getStylisticRules(stylisticConfigs: Config[]): Linter.RulesRecord {
     const stylisticRules: Linter.RulesRecord = {}
 
     for (const config of stylisticConfigs) {
