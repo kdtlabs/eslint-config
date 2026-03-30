@@ -97,6 +97,13 @@ export const javascriptRules: Config['rules'] = {
     'unused-imports/no-unused-imports': 'error',
     'unused-imports/no-unused-vars': ['error', { args: 'after-used', argsIgnorePattern: '^_', vars: 'all', varsIgnorePattern: '^_' }],
 
+    // promise
+    'promise/always-return': 'off',
+    'promise/catch-or-return': 'off',
+    'promise/no-multiple-resolved': 'error',
+    'promise/no-nesting': 'off',
+    'promise/no-promise-in-callback': 'off',
+
     // antfu
     'antfu/consistent-chaining': 'error',
     'antfu/if-newline': 'error',
