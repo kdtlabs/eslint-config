@@ -4,7 +4,7 @@ import { join } from 'node:path'
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
 import importX from 'eslint-plugin-import-x'
 import typescriptEslint from 'typescript-eslint'
-import { toArray } from '../../utils'
+import { flatRules, toArray } from '../../utils'
 import { typescriptRules, typescriptTypeAwareRules } from './rules'
 
 export interface TypescriptConfigOptions {
@@ -22,6 +22,7 @@ export const typescript: EslintConfig<TypescriptConfigOptions> = ({ environments
 
     return [
         {
+            extends: ['import-x/flat/typescript'],
             files,
             languageOptions: {
                 parser: typescriptEslint.parser,
@@ -34,7 +35,12 @@ export const typescript: EslintConfig<TypescriptConfigOptions> = ({ environments
                 '@typescript-eslint': typescriptEslint.plugin,
                 'import-x': importX,
             },
-            rules: typescriptRules,
+            rules: {
+                ...flatRules(typescriptEslint.configs.strict.map((c) => c.rules)),
+                ...flatRules(typescriptEslint.configs.stylistic.map((c) => c.rules)),
+                ...importX.configs.typescript.rules,
+                ...typescriptRules,
+            },
             settings: {
                 'import-x/resolver-next': [
                     createTypeScriptImportResolver({
@@ -45,15 +51,18 @@ export const typescript: EslintConfig<TypescriptConfigOptions> = ({ environments
                 ],
             },
         },
-        {
+        isTsConfigExists ? {
             files: [`**/*.?([cm])ts?(x)`],
             languageOptions: {
-                parserOptions: {
-                    ...(isTsConfigExists ? { project: tsconfigPath, tsconfigRootDir } : {}),
-                },
+                parserOptions: { project: tsconfigPath, tsconfigRootDir },
             },
-            rules: isTsConfigExists ? { ...typescriptTypeAwareRules, ...typescriptRules } : {},
-        },
+            rules: {
+                ...flatRules(typescriptEslint.configs.strictTypeChecked.map((c) => c.rules)),
+                ...flatRules(typescriptEslint.configs.stylisticTypeChecked.map((c) => c.rules)),
+                ...typescriptRules,
+                ...typescriptTypeAwareRules,
+            },
+        } : {},
         {
             files: ['**/*.d.ts'],
             rules: {
