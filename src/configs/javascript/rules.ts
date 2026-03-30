@@ -113,6 +113,6 @@ export const javascriptRules: Config['rules'] = {
 }
 
 export const javascriptRulesInEditor: Config['rules'] = {
-    'prefer-const': 'warn',
+    'prefer-const': 'off',
     'unused-imports/no-unused-imports': 'warn',
 }
