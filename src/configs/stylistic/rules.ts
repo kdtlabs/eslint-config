@@ -4,6 +4,7 @@ import { commaDangleOptions, lineAroundCommentOptions, paddingLineBetweenStateme
 export const stylisticRules: Config['rules'] = {
     '@stylistic/array-bracket-newline': ['error', 'consistent'],
     '@stylistic/array-element-newline': ['error', 'consistent'],
+    '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: false }],
     '@stylistic/comma-dangle': ['error', commaDangleOptions],
     '@stylistic/function-call-argument-newline': ['error', 'consistent'],
     '@stylistic/function-call-spacing': 'error',
