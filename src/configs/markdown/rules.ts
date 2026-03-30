@@ -92,16 +92,16 @@ export const incompatibleRules: Config['rules'] = {
 }
 
 export const markdownOverrideRules: Config['rules'] = {
-    'markdown/no-duplicate-headings': ['warn', { checkSiblingsOnly: true }],
-    'markdown/no-html': ['warn', { allowed: ['br', 'sup', 'sub', 'kbd', 'details', 'summary', 'picture', 'source', 'img'] }],
+    'markdown/no-duplicate-headings': ['error', { checkSiblingsOnly: true }],
+    'markdown/no-html': ['error', { allowed: ['br', 'sup', 'sub', 'kbd', 'details', 'summary', 'picture', 'source', 'img'] }],
     'markdown/no-missing-link-fragments': 'off',
     'markdown/no-space-in-emphasis': ['error', { checkStrikethrough: true }],
     'markdown/table-column-count': ['error', { checkMissingCells: true }],
 }
 
 export const preferencesOverrideRules: Config['rules'] = {
-    'markdown-preferences/canonical-code-block-language': 'warn',
-    'markdown-preferences/no-heading-trailing-punctuation': 'warn',
+    'markdown-preferences/canonical-code-block-language': 'error',
+    'markdown-preferences/no-heading-trailing-punctuation': 'error',
 }
 
 export const linksOverrideRules: Config['rules'] = {
@@ -109,5 +109,5 @@ export const linksOverrideRules: Config['rules'] = {
 }
 
 export const linksDeadUrlRules: Config['rules'] = {
-    'markdown-links/no-dead-urls': ['warn', { ignoreLocalhost: true, maxRetries: 2, timeout: 5000 }],
+    'markdown-links/no-dead-urls': ['error', { ignoreLocalhost: true, maxRetries: 2, timeout: 5000 }],
 }

@@ -1,9 +1,6 @@
 import type { Config } from 'eslint/config'
 
 export const regexpOverrideRules: Config['rules'] = {
-    // --- Restore: keep custom option from javascript config (recommended overrides it) ---
-    'prefer-regex-literals': ['error', { disallowRedundantWrapping: true }],
-
     // --- Enable: high-value non-recommended rules ---
     'regexp/no-control-character': 'error',
     'regexp/no-octal': 'error',
@@ -13,17 +10,16 @@ export const regexpOverrideRules: Config['rules'] = {
     'regexp/require-unicode-regexp': 'error',
 
     // --- Enable: security (ReDoS via quadratic moves, complements no-super-linear-backtracking) ---
-    'regexp/no-super-linear-move': 'warn',
+    'regexp/no-super-linear-move': 'error',
 
-    // --- Enable: better patterns, warn for gradual adoption ---
-    'regexp/prefer-lookaround': 'warn',
-    'regexp/prefer-regexp-test': 'warn',
+    // --- Enable: better patterns ---
+    'regexp/prefer-lookaround': 'error',
 
-    // --- Enable: named capture group ecosystem (all warn for gradual adoption) ---
-    'regexp/prefer-named-backreference': 'warn',
-    'regexp/prefer-named-capture-group': 'warn',
-    'regexp/prefer-named-replacement': 'warn',
-    'regexp/prefer-result-array-groups': 'warn',
+    // --- Enable: named capture group ecosystem ---
+    'regexp/prefer-named-backreference': 'error',
+    'regexp/prefer-named-capture-group': 'error',
+    'regexp/prefer-named-replacement': 'error',
+    'regexp/prefer-result-array-groups': 'error',
 
     // --- Upgrade: warn -> error (real bugs, not style) ---
     'regexp/no-empty-alternative': 'error',
