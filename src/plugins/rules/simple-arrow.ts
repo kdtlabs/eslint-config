@@ -4,6 +4,9 @@ import type { Node } from 'estree'
 interface Options {
     async?: boolean
     exportDefault?: boolean
+    force?: boolean
+    indent?: number
+    maxLength?: false | number
 }
 
 const LEADING_WHITESPACE = /^(?<indent>\s*)/u
@@ -154,7 +157,31 @@ function getReturnStatement(node: Rule.Node & { async: boolean, body: { body: an
     return returnStmt
 }
 
-function buildReplacement(node: Rule.Node & { async: boolean, id?: { name?: string } | null }, parent: Rule.Node, sourceCode: Rule.RuleContext['sourceCode'], returnStmt: Rule.Node & { argument: Rule.Node }): string {
+function wrapReturnText(prefix: string, returnText: string, indent: number, isObject: boolean): string {
+    const indentStr = ' '.repeat(indent)
+
+    if (isObject) {
+        // returnText is already wrapped like `({...})`, strip outer `(` and `)` to get `{...}`
+        const objectBody = returnText.slice(1, -1)
+
+        if (objectBody.includes('\n')) {
+            // Already multiline — preserve with indent
+            const lines = objectBody.split('\n')
+            const indented = lines.map((line, i) => (i === 0 ? line : `${indentStr}${line}`))
+
+            return `${prefix} => (${indented.join('\n')})`
+        }
+
+        // Single-line object — push content to next line: `=> ({\n    ...\n})`
+        const objectContent = objectBody.slice(1, -1).trim()
+
+        return `${prefix} => ({\n${indentStr}${objectContent}\n})`
+    }
+
+    return `${prefix} => (\n${indentStr}${returnText}\n)`
+}
+
+function buildReplacement(node: Rule.Node & { async: boolean, id?: { name?: string } | null }, parent: Rule.Node, sourceCode: Rule.RuleContext['sourceCode'], returnStmt: Rule.Node & { argument: Rule.Node }, maxLength: false | number, force: boolean, indent: number): string | null {
     const isExportDefault = parent.type === 'ExportDefaultDeclaration'
     const isExportNamed = parent.type === 'ExportNamedDeclaration'
 
@@ -170,18 +197,28 @@ function buildReplacement(node: Rule.Node & { async: boolean, id?: { name?: stri
     const reportNode = isExportDefault || isExportNamed ? parent : node
     const returnText = buildReturnText(returnStmt.argument, returnStmt as Rule.Node, reportNode, sourceCode)
 
-    const arrow = `${asyncPrefix}${typeParamsText}${paramsText}${returnTypeText} => ${returnText}`
+    const arrowSignature = `${asyncPrefix}${typeParamsText}${paramsText}${returnTypeText}`
+    const arrow = `${arrowSignature} => ${returnText}`
 
-    if (isExportDefault) {
-        return `export default ${arrow}`
+    const declarationPrefix = isExportDefault ? 'export default' : `${isExportNamed ? 'export ' : ''}const ${node.id?.name} =`
+
+    const singleLine = `${declarationPrefix} ${arrow}`
+
+    if (maxLength === false || singleLine.length < maxLength) {
+        return singleLine
     }
 
-    return `${isExportNamed ? 'export ' : ''}const ${node.id?.name} = ${arrow}`
+    // Line exceeds maxLength
+    if (!force) {
+        return null
+    }
+
+    return wrapReturnText(`${declarationPrefix} ${arrowSignature}`, returnText, indent, returnStmt.argument.type === 'ObjectExpression')
 }
 
 export const simpleArrow: Rule.RuleModule = {
     create(context) {
-        const { async: allowAsync = true, exportDefault: allowExportDefault = false } = (context.options[0] ?? {}) as Options
+        const { async: allowAsync = true, exportDefault: allowExportDefault = false, force = true, indent = 4, maxLength = 120 } = (context.options[0] ?? {}) as Options
 
         return {
             FunctionDeclaration(node) {
@@ -204,7 +241,11 @@ export const simpleArrow: Rule.RuleModule = {
                 }
 
                 const reportNode = isExportDefault || isExportNamed ? parent : node
-                const replacement = buildReplacement(node as any, parent, context.sourceCode, returnStmt)
+                const replacement = buildReplacement(node as any, parent, context.sourceCode, returnStmt, maxLength, force, indent)
+
+                if (replacement === null) {
+                    return
+                }
 
                 context.report({
                     fix: (fixer) => fixer.replaceText(reportNode, replacement),
@@ -233,6 +274,22 @@ export const simpleArrow: Rule.RuleModule = {
                     exportDefault: {
                         default: false,
                         type: 'boolean',
+                    },
+                    force: {
+                        default: true,
+                        type: 'boolean',
+                    },
+                    indent: {
+                        default: 4,
+                        minimum: 1,
+                        type: 'integer',
+                    },
+                    maxLength: {
+                        default: 120,
+                        oneOf: [
+                            { minimum: 1, type: 'integer' },
+                            { const: false, type: 'boolean' },
+                        ],
                     },
                 },
                 type: 'object',
