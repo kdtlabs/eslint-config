@@ -77,9 +77,7 @@ const customGroups = [
 
 export const perfectionistOverrideRules: Config['rules'] = {
     '@stylistic/lines-between-class-members': 'off',
-    'import-x/order': 'off',
     'kdt/sort-union-types': 'off',
-    'sort-imports': 'off',
     'sort-named-imports': 'off',
 
     'perfectionist/sort-classes': ['error', { customGroups, groups: sortClassesGroup, newlinesBetween: 1, type: 'unsorted' }],
