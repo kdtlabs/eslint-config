@@ -52,7 +52,7 @@ function containsThisOrArguments(node: Node): boolean {
 }
 
 function hasOverload(node: Rule.Node & { id?: { name?: string } | null }, parentNode: Rule.Node): boolean {
-    const parentBody = parentNode.type === 'ExportNamedDeclaration' ? ((parentNode as any).parent as Rule.Node & { body?: any[] })?.body : (parentNode as any).body
+    const parentBody = parentNode.type === 'ExportNamedDeclaration' ? ((parentNode as any).parent as Rule.Node & { body?: any[] }).body : (parentNode as any).body
 
     if (!Array.isArray(parentBody) || !node.id?.name) {
         return false
