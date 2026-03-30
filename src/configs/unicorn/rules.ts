@@ -1,6 +1,7 @@
 import type { Config } from 'eslint/config'
 
 export const unicornOverrideRules: Config['rules'] = {
+    'unicorn/consistent-destructuring': 'off',
     'unicorn/consistent-function-scoping': ['error', { checkArrowFunctions: false }],
     'unicorn/custom-error-definition': 'off',
     'unicorn/filename-case': ['error', { cases: { kebabCase: true, pascalCase: true }, ignore: [String.raw`.*\.md$`] }],
