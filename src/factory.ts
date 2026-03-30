@@ -11,7 +11,6 @@ export interface EslintConfigOptions extends Partial<EslintConfigContext> {
     jsonc?: JsoncConfigOptions | boolean
     markdown?: MarkdownConfigOptions | boolean
     node?: NodeConfigOptions | boolean
-    perfectionist?: boolean
     regexp?: boolean
     sonarjs?: boolean
     style?: StyleOptions
@@ -19,7 +18,7 @@ export interface EslintConfigOptions extends Partial<EslintConfigContext> {
     toml?: TomlConfigOptions | boolean
     typescript?: TypescriptConfigOptions | boolean
     unicorn?: boolean
-    vue?: VueConfigOptions | boolean
+    vue?: Omit<VueConfigOptions, 'stylisticConfigs'> | boolean
     yml?: YmlConfigOptions | boolean
 }
 
@@ -32,9 +31,17 @@ export const kdt = ({ command = true, environments = ['browser', 'bun', 'node'],
     const typescriptOptions = resolveOptions(options.typescript, {})
     const vueOptions = resolveOptions(vue ?? isPackageExists('vue'), {})
     const configs: Array<Config | Config[]> = [javascript(context)]
+    const stylisticConfigs = stylistic(context, style)
 
     if (typescriptOptions !== false) {
         configs.push(typescript(context, { ...typescriptOptions, extraFileExtensions: [...typescriptOptions.extraFileExtensions ?? [], ...(vueOptions === false ? [] : ['vue'])] }))
+    }
+
+    const nodeOptions = resolveOptions(options.node, false)
+    const hasNodeLikeEnv = environments.some((e) => e === 'node' || e === 'bun' || e === 'deno')
+
+    if (nodeOptions !== false || hasNodeLikeEnv) {
+        configs.push(node(context, nodeOptions === false ? {} : nodeOptions))
     }
 
     if (options.jsdoc ?? true) {
@@ -60,37 +67,28 @@ export const kdt = ({ command = true, environments = ['browser', 'bun', 'node'],
         configs.push(ymlConfig(context, { indent: styleIndent, ...ymlOptions }))
     }
 
-    const nodeOptions = resolveOptions(options.node, false)
-    const hasNodeLikeEnv = environments.some((e) => e === 'node' || e === 'bun' || e === 'deno')
-
-    if (nodeOptions !== false || hasNodeLikeEnv) {
-        configs.push(node(context, nodeOptions === false ? {} : nodeOptions))
-    }
-
-    configs.push(stylistic(context, style))
-
-    if (options.unicorn ?? true) {
-        configs.push(unicorn(context))
-    }
+    configs.push(stylisticConfigs)
 
     if (options.regexp ?? true) {
         configs.push(regexp(context))
+    }
+
+    if (options.unicorn ?? true) {
+        configs.push(unicorn(context))
     }
 
     if (options.sonarjs ?? true) {
         configs.push(sonarjs(context))
     }
 
-    if (options.perfectionist ?? true) {
-        configs.push(perfectionist(context))
+    configs.push(perfectionist(context))
+
+    if (vueOptions !== false) {
+        configs.push(vueCfg(context, { ...vueOptions, stylisticConfigs }))
     }
 
     if (tailwind ?? isPackageExists('tailwindcss')) {
         configs.push(tailwindCss(context))
-    }
-
-    if (vueOptions !== false) {
-        configs.push(vueCfg(context, vueOptions))
     }
 
     const markdownOptions = resolveOptions(options.markdown, {})
