@@ -41,7 +41,7 @@ export const javascript: EslintConfig = ({ environments: environment, isInEditor
         },
     },
     {
-        files: [`scripts/**`],
+        files: [`scripts/**/*.?([cm])[jt]s?(x)`],
         rules: {
             'no-alert': 'off',
             'no-console': 'off',
