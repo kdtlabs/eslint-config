@@ -33,7 +33,7 @@ export const javascriptRules: Config['rules'] = {
     'no-new-func': 'error',
     'no-new-wrappers': 'error',
     'no-octal-escape': 'error',
-    'no-promise-executor-return': 'error',
+    'no-promise-executor-return': 'off',
     'no-proto': 'error',
     'no-redeclare': ['error', { builtinGlobals: false }],
     'no-restricted-globals': ['error', { message: 'Use `globalThis` instead.', name: 'global' }, { message: 'Use `globalThis` instead.', name: 'self' }],

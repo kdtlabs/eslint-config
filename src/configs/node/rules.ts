@@ -42,5 +42,6 @@ export const securityNodeOnlyOverrides: Config['rules'] = {
     'security/detect-child-process': 'off',
     'security/detect-new-buffer': 'off',
     'security/detect-non-literal-fs-filename': 'off',
+    'security/detect-non-literal-regexp': 'off',
     'security/detect-non-literal-require': 'off',
 }
