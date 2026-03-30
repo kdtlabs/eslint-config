@@ -26,10 +26,7 @@ export const stylistic: EslintConfig<StyleOptions> = ({ isInEditor }, { indent =
 
     return [
         {
-            plugins: {
-                '@stylistic': stylisticPlugin,
-                kdt,
-            },
+            plugins: { '@stylistic': stylisticPlugin, kdt },
             rules: {
                 ...stylisticPlugin.configs['disable-legacy'].rules,
                 ...config.rules,
