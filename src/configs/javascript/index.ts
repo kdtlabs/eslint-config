@@ -54,6 +54,8 @@ export const javascript: EslintConfig = ({ environments: environment, isInEditor
     {
         files: ['**/*.{test,spec}.js?(x)'],
         rules: {
+            'no-new-wrappers': 'off',
+            'no-sparse-arrays': 'off',
             'no-unused-expressions': 'off',
         },
     },

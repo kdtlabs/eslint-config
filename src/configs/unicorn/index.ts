@@ -10,6 +10,13 @@ export const unicorn: EslintConfig = () => [
             ...unicornOverrideRules,
         },
     },
+    {
+        files: ['**/*.{test,spec}.js?(x)'],
+        rules: {
+            'unicorn/error-message': 'off',
+            'unicorn/no-thenable': 'off',
+        },
+    },
 ]
 
 export { unicornOverrideRules }
