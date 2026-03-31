@@ -1,6 +1,19 @@
 # Changelog
 
 
+## v0.0.4
+
+[compare changes](https://github.com/kdtlabs/eslint-config/compare/v0.0.3...v0.0.4)
+
+### 🩹 Fixes
+
+- **rules:** Disable no-promise-executor-return and detect-non-literal-regexp ([789ca51](https://github.com/kdtlabs/eslint-config/commit/789ca51))
+- **rules:** Relax strict rules for test files and disable noisy JS rules ([d4d11cf](https://github.com/kdtlabs/eslint-config/commit/d4d11cf))
+
+### ❤️ Contributors
+
+- Diep Dang <kdt310722@gmail.com>
+
 ## v0.0.3
 
 [compare changes](https://github.com/kdtlabs/eslint-config/compare/v0.0.2...v0.0.3)
