@@ -29,7 +29,7 @@
     },
     "scripts": {
         "build": "rimraf dist && bun run scripts/build.ts && tsc --project tsconfig.build.json",
-        "release": "bun run build && bun run scripts/release.ts && bun publish",
+        "release": "bun run build && bun run scripts/release.ts && bunx npm publish",
         "coverage": "bun test --coverage",
         "lint": "eslint",
         "lint:fix": "eslint --fix",
@@ -86,11 +86,10 @@
     },
     "simple-git-hooks": {
         "commit-msg": "bunx --no -- commitlint --edit ${1}",
-        "pre-commit": "bunx lint-staged"
+        "pre-commit": "bunx lint-staged && bun run typecheck"
     },
     "lint-staged": {
-        "*": "bun run lint:fix",
-        "*.ts": "bash -c 'bun run typecheck'"
+        "*": "bun run lint:fix"
     },
     "commitlint": {
         "extends": "@commitlint/config-conventional"

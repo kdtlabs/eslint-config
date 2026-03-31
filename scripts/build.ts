@@ -1,21 +1,22 @@
-import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { join, resolve } from 'node:path'
 
-const rootPath = resolve(dirname(fileURLToPath(import.meta.url)), '..')
-const entrypoint = resolve(rootPath, 'src/index.ts')
-
-console.log('📦 Bundling...')
+console.log(`📦 Bundling...`)
 
 const result = await Bun.build({
     drop: ['console', 'debugger'],
-    entrypoints: [entrypoint],
+    entrypoints: [join(resolve(import.meta.dir, '..'), 'src/index.ts')],
     env: 'disable',
     format: 'esm',
-    minify: true,
+    minify: {
+        identifiers: false,
+        syntax: true,
+        whitespace: true,
+    },
     outdir: 'dist',
     packages: 'external',
     root: 'src',
     sourcemap: 'linked',
+    splitting: true,
     target: 'node',
 })
 
@@ -26,12 +27,5 @@ if (result.logs.length > 0) {
         console.warn(log)
     }
 } else {
-    const formatter = new Intl.NumberFormat()
-    const output = result.outputs[0]
-
-    if (output) {
-        console.log(`   📄 index.js (${formatter.format(output.size)} bytes)`)
-    }
-
     console.log('✅ Build complete!')
 }
