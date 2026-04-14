@@ -53,7 +53,6 @@ export const node: EslintConfig<NodeConfigOptions> = ({ environments }, { securi
         configs.push({
             rules: {
                 'n/hashbang': 'off',
-                'n/no-process-exit': 'off',
                 'n/no-unpublished-bin': 'off',
             },
         })
@@ -70,7 +69,6 @@ export const node: EslintConfig<NodeConfigOptions> = ({ environments }, { securi
             files: ['**/scripts/**', '**/bin/**'],
             rules: {
                 'n/hashbang': 'off',
-                'n/no-process-exit': 'off',
             },
         },
     )

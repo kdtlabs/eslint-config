@@ -16,6 +16,7 @@ export const GLOB_EXCLUDE = [
     '**/package-lock.json',
     '**/pnpm-lock.yaml',
     '**/yarn.lock',
+    '**/skills-lock.json',
 
     // Build outputs
     '**/dist',
@@ -29,6 +30,7 @@ export const GLOB_EXCLUDE = [
     '**/auto-import?(s).d.ts',
     '**/components.d.ts',
     '**/typed-router.d.ts',
+    '**/route-map.d.ts',
     '**/vite.config.*.timestamp-*',
     '**/CHANGELOG*.md',
     '**/LICENSE*',
@@ -69,6 +71,9 @@ export const GLOB_EXCLUDE = [
     '**/.wrangler',
 
     // AI Coding Assistants
+    '**/.agent',
+    '**/.agents',
     '**/.claude',
     '**/.kilocode',
+    '**/docs/superpowers',
 ]

@@ -12,6 +12,7 @@ export const nodeExtraRules: Config['rules'] = {
     'n/prefer-promises/dns': 'error',
     'n/prefer-promises/fs': 'error',
     'n/shebang': 'off',
+    'no-process-exit': 'off',
 }
 
 export const securityOverrideRules: Config['rules'] = {
