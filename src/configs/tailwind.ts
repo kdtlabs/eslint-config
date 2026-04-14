@@ -5,6 +5,7 @@ export const tailwind: EslintConfig = () => [
     betterTailwindcss.configs['recommended-error'],
     {
         rules: {
+            'better-tailwindcss/enforce-consistent-line-wrapping': 'off',
             'better-tailwindcss/no-unknown-classes': 'off',
         },
     },

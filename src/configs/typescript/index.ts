@@ -83,7 +83,6 @@ export const typescript: EslintConfig<TypescriptConfigOptions> = ({ environments
             files: ['**/*.{test,spec}.js?(x)'],
             rules: {
                 '@typescript-eslint/await-thenable': 'off',
-                '@typescript-eslint/require-await': 'off',
             },
         },
     ]

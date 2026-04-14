@@ -72,7 +72,7 @@ export const javascriptRules: Config['rules'] = {
     'sort-imports': 'off',
     'symbol-description': 'error',
     'unicode-bom': 'error',
-    'vars-on-top': 'error',
+    'vars-on-top': 'off',
     'yoda': 'error',
 
     // import-x

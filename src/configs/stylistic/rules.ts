@@ -35,4 +35,5 @@ export const stylisticRules: Config['rules'] = {
     '@stylistic/spaced-comment': ['error', 'always', { line: { markers: ['/'] } }],
     '@stylistic/switch-colon-spacing': 'error',
     '@stylistic/wrap-regex': 'off',
+    '@stylistic/yield-star-spacing': ['error', 'both'],
 }

@@ -37,7 +37,7 @@ export const vueOverrideRules: Config['rules'] = {
     'vue/no-setup-props-reactivity-loss': 'off',
     'vue/no-template-target-blank': 'error',
     'vue/no-this-in-before-route-enter': 'error',
-    'vue/no-undef-components': 'error',
+    'vue/no-undef-components': 'off',
     'vue/no-unused-emit-declarations': 'error',
     'vue/no-unused-refs': 'error',
     'vue/no-unused-vars': 'error',
@@ -63,7 +63,7 @@ export const vueOverrideRules: Config['rules'] = {
     'vue/singleline-html-element-content-newline': 'off',
     'vue/v-bind-style': ['error', 'shorthand', { sameNameShorthand: 'always' }],
     'vue/v-for-delimiter-style': 'error',
-    'vue/v-on-handler-style': ['error', ['method', 'inline-function']],
+    'vue/v-on-handler-style': 'off',
     'vue/valid-define-options': 'error',
     'vue/valid-v-bind': 'off',
 }

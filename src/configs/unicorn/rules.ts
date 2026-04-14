@@ -27,7 +27,7 @@ export const unicornOverrideRules: Config['rules'] = {
     'unicorn/prefer-regexp-test': 'off',
     'unicorn/prefer-string-starts-ends-with': 'off',
     'unicorn/prefer-structured-clone': 'error',
-    'unicorn/prefer-ternary': ['error', 'only-single-line'],
+    'unicorn/prefer-ternary': 'off',
     'unicorn/prefer-top-level-await': 'off',
     'unicorn/prevent-abbreviations': 'off',
     'unicorn/require-number-to-fixed-digits-argument': 'off',

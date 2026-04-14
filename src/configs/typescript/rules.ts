@@ -32,6 +32,7 @@ export const typescriptRules: Config['rules'] = {
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/triple-slash-reference': 'off',
     '@typescript-eslint/unified-signatures': 'off',
+    '@typescript-eslint/require-await': 'off',
 }
 
 export const typescriptTypeAwareRules: Config['rules'] = {

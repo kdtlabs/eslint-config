@@ -94,6 +94,7 @@ export const incompatibleRules: Config['rules'] = {
 export const markdownOverrideRules: Config['rules'] = {
     'markdown/no-duplicate-headings': ['error', { checkSiblingsOnly: true }],
     'markdown/no-html': ['error', { allowed: ['br', 'sup', 'sub', 'kbd', 'details', 'summary', 'picture', 'source', 'img'] }],
+    'markdown/no-missing-atx-heading-space': 'off',
     'markdown/no-missing-link-fragments': 'off',
     'markdown/no-space-in-emphasis': ['error', { checkStrikethrough: true }],
     'markdown/table-column-count': ['error', { checkMissingCells: true }],
