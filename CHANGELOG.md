@@ -1,6 +1,21 @@
 # Changelog
 
 
+## v0.0.5
+
+[compare changes](https://github.com/kdtlabs/eslint-config/compare/v0.0.4...v0.0.5)
+
+### 🏡 Chore
+
+- Simplify build script and move typecheck to pre-commit hook ([0ed202f](https://github.com/kdtlabs/eslint-config/commit/0ed202f))
+- Relax and adjust eslint rules ([4be7838](https://github.com/kdtlabs/eslint-config/commit/4be7838))
+- Update dependencies ([476425a](https://github.com/kdtlabs/eslint-config/commit/476425a))
+- Update node rules, typescript overrides, and glob excludes ([95e95be](https://github.com/kdtlabs/eslint-config/commit/95e95be))
+
+### ❤️ Contributors
+
+- Diep Dang <kdt310722@gmail.com>
+
 ## v0.0.4
 
 [compare changes](https://github.com/kdtlabs/eslint-config/compare/v0.0.3...v0.0.4)
