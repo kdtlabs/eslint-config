@@ -75,5 +75,10 @@ export const GLOB_EXCLUDE = [
     '**/.agents',
     '**/.claude',
     '**/.kilocode',
-    '**/docs/superpowers',
+    '**/.gitnexus',
+    'docs/superpowers/**',
+
+    // UI Frameworks
+    'src/components/ai-elements/**',
+    'src/components/ui/**',
 ]
