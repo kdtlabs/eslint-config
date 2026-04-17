@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.0.6
+
+[compare changes](https://github.com/kdtlabs/eslint-config/compare/v0.0.5...v0.0.6)
+
+### 🚀 Enhancements
+
+- **constants:** Update ignore list ([f1a1735](https://github.com/kdtlabs/eslint-config/commit/f1a1735))
+
+### 🏡 Chore
+
+- Adjust eslint rule overrides and relocate security rules ([a68bc0e](https://github.com/kdtlabs/eslint-config/commit/a68bc0e))
+
+### ❤️ Contributors
+
+- Diep Dang <kdt310722@gmail.com>
+
 ## v0.0.5
 
 [compare changes](https://github.com/kdtlabs/eslint-config/compare/v0.0.4...v0.0.5)
