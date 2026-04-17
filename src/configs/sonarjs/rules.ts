@@ -51,5 +51,6 @@ export const sonarjsOverrideRules: Config['rules'] = {
     'sonarjs/unicode-aware-regex': 'off',
     'sonarjs/unused-import': 'off',
     'sonarjs/updated-loop-counter': 'off',
+    'sonarjs/void-use': 'off',
     'sonarjs/values-not-convertible-to-numbers': 'error',
 }

@@ -1,6 +1,5 @@
 import type { Config } from 'eslint/config'
 
-const unionTypeGroups = ['named', 'import', 'operator', 'conditional', 'function', 'object', 'tuple', 'intersection', 'union', 'literal', 'keyword', 'nullish']
 const intersectionTypeGroups = ['named', 'import', 'operator', 'conditional', 'function', 'object', 'tuple', 'union', 'intersection', 'literal', 'keyword', 'nullish']
 
 const sortImportsGroups = [
@@ -91,6 +90,6 @@ export const perfectionistOverrideRules: Config['rules'] = {
     'perfectionist/sort-named-imports': ['error', { newlinesBetween: 0, newlinesInside: 0, order: 'asc', partitionByComment: true, type: 'natural' }],
     'perfectionist/sort-object-types': 'off',
     'perfectionist/sort-objects': 'off',
-    'perfectionist/sort-union-types': ['error', { groups: unionTypeGroups, order: 'asc', type: 'natural' }],
+    'perfectionist/sort-union-types': 'off',
     'perfectionist/sort-variable-declarations': 'off',
 }

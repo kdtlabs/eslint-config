@@ -22,6 +22,8 @@ export const securityOverrideRules: Config['rules'] = {
     'security/detect-object-injection': 'off',
     'security/detect-possible-timing-attacks': 'off',
     'security/detect-pseudoRandomBytes': 'off',
+    'security/detect-non-literal-regexp': 'off',
+    'security/detect-unsafe-regex': 'off',
 }
 
 export const nodeVersionDependentOverrides: Config['rules'] = {
@@ -43,6 +45,5 @@ export const securityNodeOnlyOverrides: Config['rules'] = {
     'security/detect-child-process': 'off',
     'security/detect-new-buffer': 'off',
     'security/detect-non-literal-fs-filename': 'off',
-    'security/detect-non-literal-regexp': 'off',
     'security/detect-non-literal-require': 'off',
 }

@@ -31,5 +31,6 @@ export const unicornOverrideRules: Config['rules'] = {
     'unicorn/prefer-top-level-await': 'off',
     'unicorn/prevent-abbreviations': 'off',
     'unicorn/require-number-to-fixed-digits-argument': 'off',
+    'unicorn/require-module-specifiers': 'off',
     'unicorn/switch-case-braces': ['error', 'avoid'],
 }

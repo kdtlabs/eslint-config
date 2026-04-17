@@ -70,7 +70,6 @@ export const typescript: EslintConfig<TypescriptConfigOptions> = ({ environments
                 'import-x/no-duplicates': 'off',
                 'no-restricted-syntax': 'off',
                 'unused-imports/no-unused-vars': 'off',
-                'unicorn/require-module-specifiers': 'off',
             },
         },
         {
