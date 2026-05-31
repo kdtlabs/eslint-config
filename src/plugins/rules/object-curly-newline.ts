@@ -66,7 +66,7 @@ export const objectCurlyNewline: Rule.RuleModule = {
             ...rules,
             ObjectExpression(node) {
                 if (minProperties === false || node.properties.length >= minProperties) {
-                    return rules.ObjectExpression?.(node as never)
+                    return rules.ObjectExpression?.(node)
                 }
 
                 const sourceCode = context.sourceCode
@@ -97,11 +97,11 @@ export const objectCurlyNewline: Rule.RuleModule = {
                     const hasLineBreakBeforeClose = last.loc.end.line !== closeBrace.loc.start.line
 
                     if (hasLineBreakAfterOpen || hasLineBreakBeforeClose) {
-                        return createBaseVisitor(context, 'always').ObjectExpression?.(node as never)
+                        return createBaseVisitor(context, 'always').ObjectExpression?.(node)
                     }
                 }
 
-                return rules.ObjectExpression?.(node as never)
+                return rules.ObjectExpression?.(node)
             },
         }
     },

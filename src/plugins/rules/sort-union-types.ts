@@ -81,7 +81,7 @@ export const sortUnionTypes: Rule.RuleModule = {
             })
         }
 
-        return { TSIntersectionType: check, TSUnionType: check } as Rule.RuleListener
+        return { TSIntersectionType: check, TSUnionType: check }
     },
     meta: {
         docs: {

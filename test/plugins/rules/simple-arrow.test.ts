@@ -7,7 +7,7 @@ const ruleTester = new RuleTester()
 
 const tsTester = new RuleTester({
     languageOptions: {
-        parser: tseslint.parser as any,
+        parser: tseslint.parser,
     },
 })
 

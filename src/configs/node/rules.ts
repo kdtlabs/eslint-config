@@ -6,6 +6,7 @@ export const nodeExtraRules: Config['rules'] = {
     'n/no-missing-require': 'off',
     'n/no-new-require': 'error',
     'n/no-path-concat': 'error',
+    'n/no-process-exit': 'off',
     'n/no-unpublished-import': 'off',
     'n/no-unpublished-require': 'off',
     'n/prefer-node-protocol': 'off',

@@ -195,7 +195,7 @@ function buildReplacement(node: Rule.Node & { async: boolean, id?: { name?: stri
 
     const paramsText = buildParamsText(node as any, sourceCode, typeParamsText, returnTypeText)
     const reportNode = isExportDefault || isExportNamed ? parent : node
-    const returnText = buildReturnText(returnStmt.argument, returnStmt as Rule.Node, reportNode, sourceCode)
+    const returnText = buildReturnText(returnStmt.argument, returnStmt, reportNode, sourceCode)
 
     const arrowSignature = `${asyncPrefix}${typeParamsText}${paramsText}${returnTypeText}`
     const arrow = `${arrowSignature} => ${returnText}`
@@ -228,7 +228,7 @@ export const simpleArrow: Rule.RuleModule = {
                     return
                 }
 
-                if (hasOverload(node as any, node.parent)) {
+                if (hasOverload(node, node.parent)) {
                     return
                 }
 
