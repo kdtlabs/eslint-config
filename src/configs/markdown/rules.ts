@@ -20,8 +20,8 @@ export const incompatibleRules: Config['rules'] = {
     // --- @stylistic ---
     '@stylistic/lines-around-comment': 'off',
 
-    // --- import-x ---
-    'import-x/no-empty-named-blocks': 'off',
+    // --- import-lite ---
+    'import-lite/no-duplicates': 'off',
 
     // --- jsdoc (all crash on markdown sourceCode) ---
     'jsdoc/check-access': 'off',

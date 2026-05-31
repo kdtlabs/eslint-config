@@ -75,23 +75,13 @@ export const javascriptRules: Config['rules'] = {
     'vars-on-top': 'off',
     'yoda': 'error',
 
-    // import-x
-    'import-x/consistent-type-specifier-style': 'off',
-    'import-x/first': 'error',
-    'import-x/newline-after-import': ['error', { considerComments: true, count: 1 }],
-    'import-x/no-absolute-path': 'error',
-    'import-x/no-cycle': ['error', { maxDepth: 3 }],
-    'import-x/no-duplicates': 'error',
-    'import-x/no-empty-named-blocks': 'error',
-    'import-x/no-mutable-exports': 'error',
-    'import-x/no-named-as-default': 'off',
-    'import-x/no-named-as-default-member': 'off',
-    'import-x/no-named-default': 'error',
-    'import-x/no-self-import': 'error',
-    'import-x/no-unresolved': 'off',
-    'import-x/no-useless-path-segments': 'error',
-    'import-x/no-webpack-loader-syntax': 'error',
-    'import-x/order': 'off',
+    // import-lite
+    'import-lite/consistent-type-specifier-style': 'off',
+    'import-lite/first': 'error',
+    'import-lite/newline-after-import': ['error', { considerComments: true, count: 1 }],
+    'import-lite/no-duplicates': 'error',
+    'import-lite/no-mutable-exports': 'error',
+    'import-lite/no-named-default': 'error',
 
     // unused-imports
     'unused-imports/no-unused-imports': 'error',

@@ -77,7 +77,7 @@ export const kdt = ({ command = true, environments = ['browser', 'bun', 'node'],
         configs.push(unicorn(context))
     }
 
-    if (options.sonarjs ?? true) {
+    if (options.sonarjs ?? false) {
         configs.push(sonarjs(context))
     }
 

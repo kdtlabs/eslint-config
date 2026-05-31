@@ -2,7 +2,7 @@ import type { EslintConfig } from '../../types'
 import comments from '@eslint-community/eslint-plugin-eslint-comments'
 import jsPlugin from '@eslint/js'
 import antfuPlugin from 'eslint-plugin-antfu'
-import importX from 'eslint-plugin-import-x'
+import importLite from 'eslint-plugin-import-lite'
 import unusedImports from 'eslint-plugin-unused-imports'
 import { GLOB_EXCLUDE } from '../../constants'
 import { getEnvironmentGlobals } from '../../utils'
@@ -14,7 +14,7 @@ import promisePlugin from 'eslint-plugin-promise'
 export const javascript: EslintConfig = ({ environments: environment, isInEditor }) => [
     { ignores: GLOB_EXCLUDE },
     {
-        extends: ['js/recommended', 'import-x/flat/recommended', 'promise/recommended'],
+        extends: ['js/recommended', 'promise/recommended'],
         languageOptions: {
             ecmaVersion: 'latest',
             globals: getEnvironmentGlobals(environment),
@@ -33,7 +33,7 @@ export const javascript: EslintConfig = ({ environments: environment, isInEditor
         plugins: {
             '@eslint-community/eslint-comments': comments,
             'antfu': antfuPlugin,
-            'import-x': importX,
+            'import-lite': importLite,
             'js': jsPlugin,
             'promise': promisePlugin,
             'unused-imports': unusedImports,

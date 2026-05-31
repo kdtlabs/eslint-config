@@ -4,6 +4,7 @@ export const unicornOverrideRules: Config['rules'] = {
     'unicorn/consistent-destructuring': 'off',
     'unicorn/consistent-function-scoping': ['error', { checkArrowFunctions: false }],
     'unicorn/custom-error-definition': 'off',
+    'unicorn/explicit-length-check': 'off',
     'unicorn/filename-case': ['error', { cases: { kebabCase: true, pascalCase: true }, ignore: [String.raw`.*\.md$`] }],
     'unicorn/import-style': 'off',
     'unicorn/new-for-builtins': 'off',

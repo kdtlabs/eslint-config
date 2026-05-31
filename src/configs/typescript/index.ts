@@ -1,8 +1,6 @@
 import type { EslintConfig } from '../../types'
 import { existsSync } from 'node:fs'
-import { join } from 'node:path'
-import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript'
-import importX from 'eslint-plugin-import-x'
+import { join, relative } from 'node:path'
 import typescriptEslint from 'typescript-eslint'
 import { flatRules, toArray } from '../../utils'
 import { typescriptRules, typescriptTypeAwareRules } from './rules'
@@ -13,16 +11,17 @@ export interface TypescriptConfigOptions {
     tsconfigRootDir?: string
 }
 
-export const typescript: EslintConfig<TypescriptConfigOptions> = ({ environments }, options = {}) => {
+export const typescript: EslintConfig<TypescriptConfigOptions> = (_, options = {}) => {
     const { extraFileExtensions = [], tsconfigPath = ['tsconfig.json'], tsconfigRootDir = process.cwd() } = options
 
     const files = [`**/*.?([cm])[jt]s?(x)`, ...extraFileExtensions.map((ext) => `**/*.${ext}`)]
-    const tsconfigPaths = toArray(tsconfigPath).map((path) => join(tsconfigRootDir, path))
-    const isTsConfigExists = tsconfigPaths.every((path) => existsSync(path))
+    const tsconfigPaths = toArray(tsconfigPath)
+    const resolvedTsconfigPaths = tsconfigPaths.map((path) => join(tsconfigRootDir, path))
+    const isTsConfigExists = resolvedTsconfigPaths.every((path) => existsSync(path))
+    const defaultProject = isTsConfigExists && tsconfigPaths.length === 1 ? relative(tsconfigRootDir, resolvedTsconfigPaths[0]!) || tsconfigPaths[0] : undefined
 
     return [
         {
-            extends: ['import-x/flat/typescript'],
             files,
             languageOptions: {
                 parser: typescriptEslint.parser,
@@ -33,28 +32,20 @@ export const typescript: EslintConfig<TypescriptConfigOptions> = ({ environments
             },
             plugins: {
                 '@typescript-eslint': typescriptEslint.plugin,
-                'import-x': importX,
             },
             rules: {
                 ...flatRules(typescriptEslint.configs.strict.map((c) => c.rules)),
                 ...flatRules(typescriptEslint.configs.stylistic.map((c) => c.rules)),
-                ...importX.configs.typescript.rules,
                 ...typescriptRules,
-            },
-            settings: {
-                'import-x/resolver-next': [
-                    createTypeScriptImportResolver({
-                        alwaysTryTypes: true,
-                        bun: environments.includes('bun'),
-                        project: isTsConfigExists ? tsconfigPaths : undefined,
-                    }),
-                ],
             },
         },
         isTsConfigExists ? {
             files: [`**/*.?([cm])ts?(x)`],
             languageOptions: {
-                parserOptions: { project: tsconfigPath, tsconfigRootDir },
+                parserOptions: {
+                    projectService: defaultProject ? { defaultProject } : true,
+                    tsconfigRootDir,
+                },
             },
             rules: {
                 ...flatRules(typescriptEslint.configs.strictTypeChecked.map((c) => c.rules)),
@@ -67,7 +58,7 @@ export const typescript: EslintConfig<TypescriptConfigOptions> = ({ environments
             files: ['**/*.d.ts'],
             rules: {
                 '@eslint-community/eslint-comments/no-unlimited-disable': 'off',
-                'import-x/no-duplicates': 'off',
+                'import-lite/no-duplicates': 'off',
                 'no-restricted-syntax': 'off',
                 'unused-imports/no-unused-vars': 'off',
             },
